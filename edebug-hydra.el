@@ -11,57 +11,55 @@
 
 ;;; Code:
 
-;;;###autoload
-(defhydra hydra-edebug (:hint t)
-  "
-Break: _I_instrument callee _x_ breakpoint here
-Navigation: _w_here _z_:point
-Step: _s_top step _o_ut
-"
+(require 'hydra)
 
-  ("q" nil :exit t)
-  ("b" #'edebug-backtrace "backtrace")
-  ("-" #'negative-argument "neg argument")
+(defhydra hydra-edebug (:hint t)
+  "edebug"
+
+  ("q" nil "quit")
+  ("b" #'edebug-backtrace "backtrace" :column "common")
+  ("-" #'negative-argument "neg argument" :column "common")
 
   ;; breaking
-  ("I" #'edebug-instrument-callee "instrument callee")
-  ("x" #'edebug-set-breakpoint "set breakpoint")
-  ("X" #'edebug-unset-breakpoint "unset breakpoint")
-  ("N" #'edebug-next-breakpoint "next breakpoint")
-  ("c" #'edebug-set-conditional-breakpoint "conditional bp")
-  ("C" #'edebug-set-global-break-condition "global conditional bp")
+  ("I" #'edebug-instrument-callee "instrument callee" :column "break")
+  ("x" #'edebug-set-breakpoint "set breakpoint" :column "break")
+  ("X" #'edebug-unset-breakpoint "unset breakpoint" :column "break")
+  ("N" #'edebug-next-breakpoint "next breakpoint" :column "break")
+  ("c" #'edebug-set-conditional-breakpoint "conditional bp" :column "break")
+  ("C" #'edebug-set-global-break-condition "global conditional bp"
+   :column "break")
 
   ;; navigation
-  ("w" #'edebug-where "where")
-  ("z" #'edebug-bounce-point "bounce point")
+  ("w" #'edebug-where "where" :column "common")
+  ("z" #'edebug-bounce-point "bounce point" :column "common")
 
   ;; stepping
-  ("h" #'edebug-goto-here "continue until point")
-  ("s" #'edebug-stop "stop")
-  ("o" #'edebug-step-out "step out")
-  ("i" #'edebug-step-in "step in")
-  ("f" #'edebug-forward "forward")
+  ("h" #'edebug-goto-here "continue until point" :column "step")
+  ("s" #'edebug-stop "stop" :column "step")
+  ("o" #'edebug-step-out "step out" :column "step")
+  ("i" #'edebug-step-in "step in" :column "step")
+  ("f" #'edebug-forward "forward" :column "step")
 
   ;; sexp oriented
-  ("l" #'edeug-forward-sexp "forward sexp")
-  ("e" #'edebug-eval-expression "eval expression")
-  ("E" #'edebug-eval-last-sexp "eval expression")
-  ("r" #'edebug-previous-result "previous result")
-  (";" #'edebug-visit-eval-list "visit eval list")
+  ("l" #'edeug-forward-sexp "forward sexp" :column "sexp")
+  ("e" #'edebug-eval-expression "eval expression" :column "sexp")
+  ("E" #'edebug-eval-last-sexp "eval expression" :column "sexp")
+  ("r" #'edebug-previous-result "previous result" :column "sexp")
+  (";" #'edebug-visit-eval-list "visit eval list" :column "sexp")
 
   ;; exiting
-  ("Q" #'edebug-top-level-nonstop "toplevel non stop")
-  ("S" #'edebug-stop "edebug stop")
+  ("Q" #'edebug-top-level-nonstop "toplevel non stop" :column "common")
+  ("S" #'edebug-stop "edebug stop" :column "common")
 
   ;; modes
-  ("1" #'edebug-Go-nonstop-mode "go nonstop")
-  ("2" #'edebug-go-mode "go until break")
-  ("3" #'edebug-step-mode "step mode")
-  ("4" #'edebug-next-mode "next mode")
-  ("5" #'edebug-continue-mode "continue")
-  ("6" #'edebug-Continue-fast-mode "continue fast")
-  ("7" #'edebug-trace-mode "trace")
-  ("8" #'edebug-Trace-fast-mode "trace fast"))
+  ("1" #'edebug-Go-nonstop-mode "go nonstop" :column "modes")
+  ("2" #'edebug-go-mode "go until break" :column "modes")
+  ("3" #'edebug-step-mode "step mode" :column "modes")
+  ("4" #'edebug-next-mode "next mode" :column "modes")
+  ("5" #'edebug-continue-mode "continue" :column "modes")
+  ("6" #'edebug-Continue-fast-mode "continue fast" :column "modes")
+  ("7" #'edebug-trace-mode "trace" :column "modes")
+  ("8" #'edebug-Trace-fast-mode "trace fast" :column "modes"))
 
 ;; Local Variables:
 ;; outline-regexp: ";;\\([;*]+ [^\s\t\n]\\|###autoload\\)\\|("
