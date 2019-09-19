@@ -1,6 +1,15 @@
-;;; edebug-hydra.el --- hexpressionydra interface for edebug -*- lexical-binding: t; -*-
+;;; edebug-hydra.el --- hydra interface for edebug -*- lexical-binding: t; -*-
 
-;;; code
+;; Author: Rudi Grinberg <rudi.grinberg@gmail.com>
+;; URL: http://github.com/rgrinberg/edebug-hydra
+;; Version: 0.0.1
+;; Keywords: hydra, edebug
+;; Package-Requires: ((hydra "0.15.0"))
+
+;;; Commentary:
+;; A hydra based interface for edebug
+
+;;; Code:
 
 ;;;###autoload
 (defhydra hydra-edebug (:hint t)
@@ -54,5 +63,11 @@ Step: _s_top step _o_ut
   ("7" #'edebug-trace-mode "trace")
   ("8" #'edebug-Trace-fast-mode "trace fast"))
 
+;; Local Variables:
+;; outline-regexp: ";;\\([;*]+ [^\s\t\n]\\|###autoload\\)\\|("
+;; indent-tabs-mode: nil
+;; End:
+
 (provide 'edebug-hydra)
+
 ;;; edebug-hydra.el ends here
