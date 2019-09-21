@@ -13,8 +13,8 @@
 
 (require 'hydra)
 
-(defhydra hydra-edebug (:hint t)
-  "edebug"
+;;;###autoload (autoload 'hydra-edebug/body "edebug-hydra" nil t)
+(defhydra hydra-edebug (:hint t :foreign-keys run)
 
   ("q" nil "quit")
   ("b" #'edebug-backtrace "backtrace" :column "common")
